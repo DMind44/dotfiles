@@ -93,6 +93,12 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
+	-- git
+	use("airblade/vim-gitgutter")
+
+	-- terminal
+	use("voldikss/vim-floaterm")
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end
