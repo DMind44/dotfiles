@@ -96,6 +96,7 @@ return packer.startup(function(use)
 	-- git
 	use("airblade/vim-gitgutter")
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+	use("ruanyl/vim-gh-line")
 
 	-- terminal
 	use("voldikss/vim-floaterm")
