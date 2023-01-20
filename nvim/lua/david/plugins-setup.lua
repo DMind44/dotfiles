@@ -97,9 +97,14 @@ return packer.startup(function(use)
 	use("airblade/vim-gitgutter")
 	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 	use("ruanyl/vim-gh-line")
+	use("kristijanhusak/vim-create-pr")
+	use("sindrets/diffview.nvim")
 
 	-- terminal
 	use("voldikss/vim-floaterm")
+
+	-- colorschemes
+	use("folke/tokyonight.nvim")
 
 	if packer_bootstrap then
 		require("packer").sync()
