@@ -99,6 +99,7 @@ return packer.startup(function(use)
 	use("ruanyl/vim-gh-line")
 	use("kristijanhusak/vim-create-pr")
 	use("sindrets/diffview.nvim")
+	use("pwntester/octo.nvim")
 
 	-- terminal
 	use("voldikss/vim-floaterm")
