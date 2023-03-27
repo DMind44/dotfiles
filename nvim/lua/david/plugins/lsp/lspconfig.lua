@@ -25,7 +25,8 @@ local on_attach = function(client, bufnr)
 
 	-- set keybinds
 	keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
-	keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
+	--keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
+	keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts) -- got to declaration
 	keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
 	keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
 	keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
@@ -67,9 +68,15 @@ typescript.setup({
 	server = {
 		capabilities = capabilities,
 		on_attach = on_attach,
+		filetypes = { "ts", "tsx" },
 	},
 })
 
+lspconfig["tsserver"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "ts", "tsx" },
+})
 -- configure css server
 lspconfig["cssls"].setup({
 	capabilities = capabilities,
@@ -89,19 +96,72 @@ lspconfig["emmet_ls"].setup({
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 })
 
+-- lspconfig["pyright"].setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	filetypes = { "python", "py" },
+-- })
+
 lspconfig["pyright"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	filetypes = { "python" },
+	filetypes = { "python", "py" },
+	settings = {
+		pyright = {
+			organizeimports = {
+				provider = "isort",
+			},
+			disableDiagnostics = true,
+			inlayHints = {
+				variableTypes = false,
+			},
+		},
+		python = {
+			analysis = {
+				extraPaths = {
+					"./lib/audit-logs",
+					"./lib/authenticator",
+					"./lib/billing",
+					"./lib/datalayer-v2",
+					"./lib/dd-db",
+					"./lib/dd-internal-authentication",
+					"./lib/dd-resilience",
+					"./lib/dd-util",
+					"./lib/dd-util-consul",
+					"./lib/dogpound",
+					"./lib/dogweb-model",
+					"./lib/dogweb-lib",
+					"./lib/integration-base",
+					"./lib/json-api-common",
+					"./lib/pylint-dogweb",
+					"./lib/redis-v2",
+					"./lib/ddgrpc",
+					"./dd/pb",
+					"./lib/dd-util-context",
+				},
+			},
+			linting = {
+				enabled = true,
+				pylintEnabled = true,
+			},
+		},
+	},
+})
+
+lspconfig["gopls"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "go" },
 })
 
 lspconfig["rust_analyzer"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
+	filetypes = { "rs" },
 })
 
 -- configure lua server (with special settings)
-lspconfig["sumneko_lua"].setup({
+lspconfig["lua_language_server"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = { -- custom settings for lua

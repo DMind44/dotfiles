@@ -75,10 +75,14 @@ return packer.startup(function(use)
 	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+	use({ "neoclide/coc.nvim", branch = "release" })
 
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+	use("joechrisellis/lsp-format-modifications.nvim")
+
+	use("fatih/vim-go")
 
 	-- treesitter configuration
 	use({
@@ -95,7 +99,7 @@ return packer.startup(function(use)
 
 	-- git
 	use("airblade/vim-gitgutter")
-	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+	use("tpope/vim--fugitive")
 	use("ruanyl/vim-gh-line")
 	use("kristijanhusak/vim-create-pr")
 	use("sindrets/diffview.nvim")
@@ -106,6 +110,10 @@ return packer.startup(function(use)
 
 	-- colorschemes
 	use("folke/tokyonight.nvim")
+
+	-- misc
+	use("mechatroner/rainbow_csv")
+	use("mg979/vim-visual-multi")
 
 	if packer_bootstrap then
 		require("packer").sync()
